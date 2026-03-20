@@ -8,7 +8,7 @@ package sistemaGestion_Tickets.model;
  *
  * @author PC
  */
-public interface calculable {   
+public class ticket implements imprimible,calculable {
     
-    double calcularTotal();
+    
 }
