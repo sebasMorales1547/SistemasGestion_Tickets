@@ -21,6 +21,7 @@ public class Main {
             Scanner Scanner = new Scanner(System.in);
 
             while(OP=='S') {
+
                 System.out.print("""
                     1. Registrar vehiculo
                     2. Registrar conductor
@@ -42,8 +43,13 @@ public class Main {
                         break;
 
                     default:
-                        System.out.println("Opcion invalida");
-
+                        System.err.println("Opcion invalida");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("volviendo al menu...");
                 }
 
 
