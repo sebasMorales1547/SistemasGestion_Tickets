@@ -9,7 +9,7 @@ package sistemaGestion_Tickets.dao;
  * @author PC
  */
 
-import sistemaGestion_Tickets.model.Conductor;
+import sistemaGestion_Tickets.model.conductor;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class conductorDao{
  private static final String ARCHIVO = "conductores.txt";
 
-    public void guardar(Conductor c) {
+    public void guardar(conductor c) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
             bw.write(c.toFileLine());
             bw.newLine();
@@ -26,8 +26,8 @@ public class conductorDao{
         }
     }
     
-    public List<Conductor> cargarTodos() {
-        List<Conductor> lista = new ArrayList<>();
+    public List<conductor> cargarTodos() {
+        List<conductor> lista = new ArrayList<>();
         File archivo = new File(ARCHIVO);
         if (!archivo.exists()) return lista;
 
@@ -36,7 +36,7 @@ public class conductorDao{
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 if (datos.length == 4) {
-                    lista.add(new Conductor(datos[0], datos[1], datos[2], datos[3]));
+                    lista.add(new conductor(datos[0], datos[1], datos[2], datos[3]));
                 }
             }
         } catch (IOException e) {

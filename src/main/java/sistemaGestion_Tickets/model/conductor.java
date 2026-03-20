@@ -8,12 +8,12 @@ package sistemaGestion_Tickets.model;
  *
  * @author PC
  */
-public class Conductor extends persona {
+public class conductor extends persona {
     
     private String numeroLicencia;
     private String categoriaLicencia;
 
-    public Conductor(String numeroLicencia, String categoriaLicencia, String cedula, String nombre) {
+    public conductor(String numeroLicencia, String categoriaLicencia, String cedula, String nombre) {
         super(cedula, nombre);
         this.numeroLicencia = numeroLicencia;
         this.categoriaLicencia = categoriaLicencia;
