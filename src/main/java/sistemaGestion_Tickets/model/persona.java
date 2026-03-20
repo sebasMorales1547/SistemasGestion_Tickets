@@ -10,7 +10,7 @@ package sistemaGestion_Tickets.model;
  */
 public abstract class persona implements imprimible {
     
-    
+ 
     protected String cedula;
     protected String nombre;
 

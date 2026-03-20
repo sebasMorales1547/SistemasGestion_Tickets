@@ -10,5 +10,5 @@ package sistemaGestion_Tickets.model;
  */
 public interface imprimible {
     
-    void inprimirDetalle();
+    void imprimirDetalle();
 }
