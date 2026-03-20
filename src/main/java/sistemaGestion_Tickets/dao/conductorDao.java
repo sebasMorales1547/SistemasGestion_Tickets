@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class conductorDao{
  private static final String ARCHIVO = "conductores.txt";
 
-    public void guardar(Conductor conductor) {
+    public void guardar(Conductor c) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
-            bw.write(conductor.toFileLine());
+            bw.write(c.toFileLine());
             bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar conductor: " + e.getMessage());

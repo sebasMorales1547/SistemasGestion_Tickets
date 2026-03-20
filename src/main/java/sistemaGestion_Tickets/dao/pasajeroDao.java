@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class pasajeroDao {
     private static final String ARCHIVO = "pasajeros:txt";
     
-public void guardar(pasajero Pasajero) {
+public void guardar(pasajero p) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
-            bw.write(Pasajero.toFileLine());
+            bw.write(p.toFileLine());
             bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar pasajero: " + e.getMessage());
