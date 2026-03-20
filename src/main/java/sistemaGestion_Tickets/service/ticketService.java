@@ -24,7 +24,7 @@ public class ticketService {
         this.tickets = ticketDao.cargarTodos(pasajeros);
     }
 
-    // TODO: implementar venderTicket cuando Desarrollador 1 termine vehiculo
+    // implementar venderTicket cuando Desarrollador 1 termine vehiculo
     
     public void listarTickets() {
         if (tickets.isEmpty()) {
