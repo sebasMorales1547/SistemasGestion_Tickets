@@ -8,7 +8,7 @@ package service;
  *
  * @author PC
  */
-
+import model.Vehiculo;
 import dao.ticketDao;
 import model.ticket;
 import model.pasajero;
@@ -25,7 +25,7 @@ public class ticketService {
         this.tickets = ticketDao.cargarTodos(pasajeros);
     }
 
-    /*public String venderTicket(pasajero p, Vehiculo v, String origen, String destino) {
+    public String venderTicket(pasajero p, Vehiculo v, String origen, String destino) {
     if (!v.hayCupoDisponible()) {
         return "Error: el vehículo " + v.getPlaca() + " no tiene cupos disponibles.";
     }
@@ -35,7 +35,7 @@ public class ticketService {
     ticketDao.guardar(t);
     return "Ticket generado. Total a pagar: $" + (int) t.calcularTotal();
 }
-    */
+    
     public void listarTickets() {
         if (tickets.isEmpty()) {
             System.out.println("No hay tickets registrados.");
