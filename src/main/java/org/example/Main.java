@@ -66,6 +66,9 @@ public class Main {
                     case 5:
                         menuVerTickets();
                         break;
+                    case 6:
+                        menuEstadisticas();
+                        break;
 
                     default:
                         System.err.println("Opcion invalida");
@@ -397,6 +400,22 @@ public class Main {
         personaService personaService = new personaService();
         ticketService ticketService = new ticketService(personaService.getPasajeros());
         ticketService.listarTickets();
+    }
+
+    public void menuEstadisticas() {
+        personaService personaService = new personaService();
+        ticketService ticketService = new ticketService(personaService.getPasajeros());
+
+        System.out.println("******* ESTADISTICAS *******");
+
+        System.out.println("--- Total recaudado ---");
+        System.out.println("$" + (int) ticketService.calcularTotalRecaudado());
+
+        System.out.println("--- Tickets por tipo de pasajero ---");
+        ticketService.mostrarTipoPasajero();
+
+        System.out.println("--- Vehiculo con mas tickets ---");
+        System.out.println(ticketService.vehiculoConMasTickets());
     }
 
 }
