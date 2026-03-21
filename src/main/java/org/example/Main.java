@@ -2,6 +2,8 @@ package org.example;
 import model.*;
 import dao.*;
 import service.personaService;
+import service.ticketService;
+import service.*;
 
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
@@ -11,7 +13,7 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         Main obj = new Main();
         obj.menu();
@@ -340,38 +342,39 @@ public class Main {
     public void menuVenderTicket() throws InterruptedException {
         char OP = 'S';
         Scanner Scanner = new Scanner(System.in);
-        ticketDao ticketDao = new ticketDao();
+
         personaService personaService = new personaService();
+        VehiculoService vehiculoService = new VehiculoService();
+        ticketService ticketService = new ticketService(personaService.getPasajeros());
 
         do {
             System.out.println("******* VENDER TICKET *******");
 
             System.out.print("Ingrese la cedula del pasajero: ");
             String cedula = Scanner.nextLine();
-
             pasajero pasajero = personaService.buscarPasajeroCedula(cedula);
 
             if (pasajero == null) {
                 System.err.println("Pasajero no encontrado.");
                 Thread.sleep(2000);
             } else {
-
                 System.out.print("Ingrese la placa del vehiculo: ");
                 String placa = Scanner.nextLine();
+                Vehiculo vehiculo = vehiculoService.buscarPorPlaca(placa);
 
-                System.out.print("Ingrese el origen: ");
-                String origen = Scanner.nextLine();
+                if (vehiculo == null) {
+                    System.err.println("Vehiculo no encontrado.");
+                    Thread.sleep(2000);
+                } else {
+                    System.out.print("Ingrese el origen: ");
+                    String origen = Scanner.nextLine();
 
-                System.out.print("Ingrese el destino: ");
-                String destino = Scanner.nextLine();
+                    System.out.print("Ingrese el destino: ");
+                    String destino = Scanner.nextLine();
 
-                System.out.print("Ingrese la tarifa base: ");
-                double tarifaBase = Scanner.nextDouble();
-                Scanner.nextLine();
-
-                ticket ticket = new ticket(pasajero, placa, origen, destino, tarifaBase);
-                ticketDao.guardar(ticket);
-                ticket.imprimirDetalle();
+                    String resultado = ticketService.venderTicket(pasajero, vehiculo, origen, destino);
+                    System.out.println(resultado);
+                }
             }
 
             System.out.print("¿Vender otro ticket? S/N: ");
@@ -380,7 +383,7 @@ public class Main {
 
         } while (OP == 'S');
     }
-    
+
 }
 
 
