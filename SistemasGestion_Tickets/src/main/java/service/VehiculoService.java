@@ -41,7 +41,7 @@ public class VehiculoService {
         }
 
         // 3. Asignación automática al objeto vehículo
-        nuevo.setRuta(rutaValida); // Cambia el String por Objeto Ruta en tu clase Vehiculo
+        nuevo.setRuta(rutaValida);
 
         vehiculos.add(nuevo);
         vDao.guardarVehiculo(nuevo);
