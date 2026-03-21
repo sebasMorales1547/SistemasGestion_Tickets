@@ -109,4 +109,10 @@ public class ticketService {
                 .filter(t -> t.getFechaCompra().equals(fecha))
                 .collect(Collectors.toList());
     }
+
+    public List<ticket> buscarPorTipoVehiculo(String tipo) {
+        return tickets.stream()
+                .filter(t -> t.getPlacaVehiculo().startsWith(tipo))
+                .collect(Collectors.toList());
+    }
 }
