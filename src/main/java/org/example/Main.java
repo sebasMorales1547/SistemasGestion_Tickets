@@ -4,7 +4,7 @@ import dao.*;
 import service.personaService;
 import service.ticketService;
 import service.*;
-
+import java.time.LocalDate;
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -246,110 +246,43 @@ public class Main {
 
 
     public void menuPasajero() throws InterruptedException {
-        char OP = 'S';
-        int opcion = 0;
-        String cedula, nombre;
+    char OP = 'S';
+    String cedula, nombre;
 
-        Scanner Scanner = new Scanner(System.in);
-        pasajeroDao pasajeroDao = new pasajeroDao();
+    Scanner Scanner = new Scanner(System.in);
+    personaService personaService = new personaService();
 
-        while (OP == 'S') {
+    do {
+        try {
+            System.out.println("******* REGISTRO DE PASAJERO *******");
+            Scanner.nextLine();
 
-            System.out.println("""
-                    REGISTRO PASAJEROS
-                    
-                    1. Adulto mayor
-                    2. Estudiante
-                    3. Regular
-                    
-                    0. Salir
-                    """);
+            System.out.print("Ingrese la cedula: ");
+            cedula = Scanner.nextLine();
 
-            System.out.print("Selecciona una opcion: ");
+            System.out.print("Ingrese el nombre: ");
+            nombre = Scanner.nextLine();
 
-            try {
-                opcion = Scanner.nextInt();
+            System.out.print("Ingrese la fecha de nacimiento (YYYY-MM-DD): ");
+            LocalDate fechaNacimiento = LocalDate.parse(Scanner.nextLine());
 
-                switch (opcion) {
-                    case 0:
-                        OP = 'N';
-                        System.out.println("Hemos terminado...");
-                        break;
+            System.out.print("¿Es estudiante? S/N: ");
+            boolean esEstudiante = Scanner.nextLine().toUpperCase().charAt(0) == 'S';
 
-                    case 1:
-                        do {
-                            System.out.println("******* REGISTRO DE ADULTO MAYOR *******");
-                            Scanner.nextLine();
+            String resultado = personaService.registrarPasajero(cedula, nombre, fechaNacimiento, esEstudiante);
+            System.out.println(resultado);
 
-                            System.out.print("Ingrese la cedula: ");
-                            cedula = Scanner.nextLine();
+            System.out.print("¿Ingresar otro? S/N: ");
+            OP = Scanner.nextLine().toUpperCase().charAt(0);
 
-                            System.out.print("Ingrese el nombre: ");
-                            nombre = Scanner.nextLine();
-
-                            pasajeroAdultoMayor pasajeroAdultoMayor = new pasajeroAdultoMayor(cedula, nombre);
-                            pasajeroDao.guardar(pasajeroAdultoMayor);
-                            System.out.println("Pasajero registrado exitosamente.");
-
-                            System.out.print("¿Ingresar otro? S/N: ");
-                            OP = Scanner.next().toUpperCase().charAt(0);
-                        } while (OP == 'S');
-                        break;
-
-                    case 2:
-                        do {
-                            System.out.println("******* REGISTRO DE ESTUDIANTE *******");
-                            Scanner.nextLine();
-
-                            System.out.print("Ingrese la cedula: ");
-                            cedula = Scanner.nextLine();
-
-                            System.out.print("Ingrese el nombre: ");
-                            nombre = Scanner.nextLine();
-
-                            pasajeroEstudiante pasajeroEstudiante = new pasajeroEstudiante(cedula, nombre);
-                            pasajeroDao.guardar(pasajeroEstudiante);
-                            System.out.println("Pasajero registrado exitosamente.");
-
-                            System.out.print("¿Ingresar otro? S/N: ");
-                            OP = Scanner.next().toUpperCase().charAt(0);
-                        } while (OP == 'S');
-                        break;
-
-                    case 3:
-                        do {
-                            System.out.println("******* REGISTRO DE REGULAR *******");
-                            Scanner.nextLine();
-
-                            System.out.print("Ingrese la cedula: ");
-                            cedula = Scanner.nextLine();
-
-                            System.out.print("Ingrese el nombre: ");
-                            nombre = Scanner.nextLine();
-
-                            pasajeroRegular pasajeroRegular = new pasajeroRegular(cedula, nombre);
-                            pasajeroDao.guardar(pasajeroRegular);
-                            System.out.println("Pasajero registrado exitosamente.");
-
-                            System.out.print("¿Ingresar otro? S/N: ");
-                            OP = Scanner.next().toUpperCase().charAt(0);
-                        } while (OP == 'S');
-                        break;
-
-                    default:
-                        System.err.println("Opcion invalida");
-                        Thread.sleep(2000);
-                        System.out.println("Regresando al menu...");
-                }
-
-            } catch (InputMismatchException e) {
-                System.err.println("Debe ingresar numeros, no letras");
-                Scanner.nextLine();
-                Thread.sleep(2000);
-                System.out.println("Regresando al menu...");
-            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            Thread.sleep(2000);
+            System.out.println("Regresando al menu...");
         }
-    }
+
+    } while (OP == 'S');
+}
 
     public void menuVenderTicket() throws InterruptedException {
         char OP = 'S';

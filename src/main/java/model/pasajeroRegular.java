@@ -4,15 +4,17 @@
  */
 package model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author PC
  */
 public class pasajeroRegular extends pasajero {
 
-    public pasajeroRegular(String cedula, String nombre) {
-        super(cedula, nombre);
-    }
+    public pasajeroRegular(String cedula, String nombre, LocalDate fechaNacimiento) {
+        super(cedula, nombre, fechaNacimiento);
+}
     
     @Override
     public double calcularDescuento(){
