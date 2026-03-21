@@ -121,4 +121,12 @@ public class ticketService {
                 .filter(t -> t.getPasajero().getTipo().equalsIgnoreCase(tipo))
                 .collect(Collectors.toList());
     }
+
+    public void resumenDia() {
+        LocalDate hoy = LocalDate.now();
+        List<ticket> ticketsHoy = buscarPorFecha(hoy);
+        System.out.println("Total tickets vendidos hoy: " + ticketsHoy.size());
+        System.out.println("Total recaudado hoy: $" + (int) ticketsHoy.stream()
+                .mapToDouble(t -> t.calcularTotal()).sum());
+    }
 }
