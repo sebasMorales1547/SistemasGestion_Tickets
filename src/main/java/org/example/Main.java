@@ -1,6 +1,7 @@
 package org.example;
 import model.*;
 import dao.*;
+import service.personaService;
 
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
@@ -335,6 +336,51 @@ public class Main {
             }
         }
     }
+
+    public void menuVenderTicket() throws InterruptedException {
+        char OP = 'S';
+        Scanner Scanner = new Scanner(System.in);
+        ticketDao ticketDao = new ticketDao();
+        personaService personaService = new personaService();
+
+        do {
+            System.out.println("******* VENDER TICKET *******");
+
+            System.out.print("Ingrese la cedula del pasajero: ");
+            String cedula = Scanner.nextLine();
+
+            pasajero pasajero = personaService.buscarPasajeroCedula(cedula);
+
+            if (pasajero == null) {
+                System.err.println("Pasajero no encontrado.");
+                Thread.sleep(2000);
+            } else {
+
+                System.out.print("Ingrese la placa del vehiculo: ");
+                String placa = Scanner.nextLine();
+
+                System.out.print("Ingrese el origen: ");
+                String origen = Scanner.nextLine();
+
+                System.out.print("Ingrese el destino: ");
+                String destino = Scanner.nextLine();
+
+                System.out.print("Ingrese la tarifa base: ");
+                double tarifaBase = Scanner.nextDouble();
+                Scanner.nextLine();
+
+                ticket ticket = new ticket(pasajero, placa, origen, destino, tarifaBase);
+                ticketDao.guardar(ticket);
+                ticket.imprimirDetalle();
+            }
+
+            System.out.print("¿Vender otro ticket? S/N: ");
+            OP = Scanner.next().toUpperCase().charAt(0);
+            Scanner.nextLine();
+
+        } while (OP == 'S');
+    }
+    
 }
 
 
