@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Vehiculo implements Imprimible {
+public abstract class Vehiculo implements imprimible {
     protected String placa;
     protected String ruta;
     protected int capacidadMaxima;

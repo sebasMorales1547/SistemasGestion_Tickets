@@ -5,7 +5,6 @@ package dao;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
 import model.*;
 import java.io.*;
 import java.util.ArrayList;
