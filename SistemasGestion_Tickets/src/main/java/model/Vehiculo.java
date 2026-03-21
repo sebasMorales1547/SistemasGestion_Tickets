@@ -30,4 +30,8 @@ public abstract class Vehiculo implements imprimible {
     public boolean hayCupoDisponible() {
         return pasajerosActuales < capacidadMaxima;
     }
+
+    public void setRuta(Ruta rutaValida) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
