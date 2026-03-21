@@ -103,4 +103,10 @@ public class ticketService {
     }
 
     public List<ticket> gettickets() { return tickets; }
+
+    public List<ticket> buscarPorFecha(LocalDate fecha) {
+        return tickets.stream()
+                .filter(t -> t.getFechaCompra().equals(fecha))
+                .collect(Collectors.toList());
+    }
 }
