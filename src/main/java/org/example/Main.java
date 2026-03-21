@@ -62,6 +62,11 @@ public class Main {
                         break;
                     case 4:
                         menuVenderTicket();
+                        break;
+                    case 5:
+                        menuVerTickets();
+                        break;
+
                     default:
                         System.err.println("Opcion invalida");
                         Thread.sleep(2000);
@@ -386,6 +391,12 @@ public class Main {
             Scanner.nextLine();
 
         } while (OP == 'S');
+    }
+
+    public void menuVerTickets() {
+        personaService personaService = new personaService();
+        ticketService ticketService = new ticketService(personaService.getPasajeros());
+        ticketService.listarTickets();
     }
 
 }
