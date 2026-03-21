@@ -4,6 +4,7 @@
  */
 package service;
 
+import dao.VehiculoDao;
 import Dao.VehiculoDao;
 import model.Vehiculo;
 import java.util.List;
