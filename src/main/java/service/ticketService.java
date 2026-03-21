@@ -115,4 +115,10 @@ public class ticketService {
                 .filter(t -> t.getPlacaVehiculo().startsWith(tipo))
                 .collect(Collectors.toList());
     }
+
+    public List<ticket> buscarPorTipoPasajero(String tipo) {
+        return tickets.stream()
+                .filter(t -> t.getPasajero().getTipo().equalsIgnoreCase(tipo))
+                .collect(Collectors.toList());
+    }
 }
