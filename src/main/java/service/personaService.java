@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sistemaGestion_Tickets.service;
+package service;
 
 /**
  *
  * @author PC
  */
 
-import sistemaGestion_Tickets.dao.conductorDao;
-import sistemaGestion_Tickets.dao.pasajeroDao;
-import sistemaGestion_Tickets.model.conductor;
-import sistemaGestion_Tickets.model.pasajero;
+import dao.conductorDao;
+import dao.pasajeroDao;
+import model.conductor;
+import model.pasajero;
 import java.util.List;
 
 public class personaService {

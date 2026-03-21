@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sistemaGestion_Tickets.service;
+package service;
 
 /**
  *
  * @author PC
  */
-import sistemaGestion_Tickets.dao.ticketDao;
-import sistemaGestion_Tickets.model.ticket;
-import sistemaGestion_Tickets.model.pasajero;
+
+import dao.ticketDao;
+import model.ticket;
+import model.pasajero;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,17 @@ public class ticketService {
         this.tickets = ticketDao.cargarTodos(pasajeros);
     }
 
-    // implementar venderTicket cuando Desarrollador 1 termine vehiculo
-    
+    /*public String venderTicket(pasajero p, Vehiculo v, String origen, String destino) {
+    if (!v.hayCupoDisponible()) {
+        return "Error: el vehículo " + v.getPlaca() + " no tiene cupos disponibles.";
+    }
+    ticket t = new ticket(p, v.getPlaca(), origen, destino, v.getTarifaBase());
+    v.setPasajerosActuales(v.getPasajerosActuales() + 1);
+    tickets.add(t);
+    ticketDao.guardar(t);
+    return "Ticket generado. Total a pagar: $" + (int) t.calcularTotal();
+}
+    */
     public void listarTickets() {
         if (tickets.isEmpty()) {
             System.out.println("No hay tickets registrados.");

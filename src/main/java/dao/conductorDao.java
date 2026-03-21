@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sistemaGestion_Tickets.dao;
+package dao;
 
 /**
  *
  * @author PC
  */
 
-import sistemaGestion_Tickets.model.conductor;
+import model.conductor;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
