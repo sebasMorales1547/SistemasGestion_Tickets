@@ -10,5 +10,5 @@ package model;
  */
 public interface imprimible {
     
-    void imprimirDetalle();
+    void imprimirDetalle(); //prueba 
 }
