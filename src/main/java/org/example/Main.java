@@ -56,8 +56,12 @@ public class Main {
                         break;
                     case 2:
                         menuConductor();
+                        break;
                     case 3:
                         menuPasajero();
+                        break;
+                    case 4:
+                        menuVenderTicket();
                     default:
                         System.err.println("Opcion invalida");
                         Thread.sleep(2000);
