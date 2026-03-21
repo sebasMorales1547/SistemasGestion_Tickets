@@ -1,10 +1,6 @@
 package org.example;
-import model.Bus;
-import dao.VehiculoDao;
-import model.Buseta;
-import model.MicroBus;
-import model.conductor;
-import dao.conductorDao;
+import model.*;
+import dao.*;
 
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
@@ -14,7 +10,7 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-     static void main(String[] args) throws InterruptedException {
+    static void main(String[] args) throws InterruptedException {
 
         Main obj = new Main();
         obj.menu();
@@ -57,6 +53,8 @@ public class Main {
                         break;
                     case 2:
                         menuConductor();
+                    case 3:
+                        menuPasajero();
                     default:
                         System.err.println("Opcion invalida");
                         Thread.sleep(2000);
@@ -75,8 +73,7 @@ public class Main {
     }
 
 
-
-    public void menuVehiculos() throws InterruptedException{
+    public void menuVehiculos() throws InterruptedException {
 
         char OP = 'S';
         int opcion = 0;
@@ -108,7 +105,7 @@ public class Main {
                         break;
                     case 1:
 
-                        char continuar='S';
+                        char continuar = 'S';
                         do {
 
                             String placa, ruta;
@@ -126,7 +123,7 @@ public class Main {
 
                             System.out.println("¿Ingresar otro bus? S/N");
                             continuar = Scanner.next().charAt(0);
-                        }while(continuar == 'S');
+                        } while (continuar == 'S');
                         break;
 
                     case 2:
@@ -149,7 +146,7 @@ public class Main {
 
                             System.out.println("¿Ingresar otro bus? S/N");
                             continuar = Scanner.next().charAt(0);
-                        }while(continuar == 'S');
+                        } while (continuar == 'S');
                         break;
 
                     case 3:
@@ -166,12 +163,12 @@ public class Main {
                             System.out.print("Ingrese la ruta del vehiculo: ");
                             ruta = Scanner.nextLine();
 
-                            MicroBus MicroBus = new MicroBus(placa,ruta);
+                            MicroBus MicroBus = new MicroBus(placa, ruta);
                             VehiculoDao.guardarVehiculo(MicroBus);
 
                             System.out.println("¿Ingresar otro bus? S/N");
                             continuar = Scanner.next().charAt(0);
-                        }while(continuar == 'S');
+                        } while (continuar == 'S');
                         break;
 
 
@@ -192,10 +189,9 @@ public class Main {
         }
     }
 
-    public void menuConductor() throws InterruptedException{
+    public void menuConductor() throws InterruptedException {
 
         char OP = 'S';
-        int opcion = 0;
         String cedula, nombre, numeroLicencia, categoriaLicencia;
 
         Scanner Scanner = new Scanner(System.in);
@@ -234,6 +230,114 @@ public class Main {
     }
 
 
+    public void menuPasajero() throws InterruptedException {
+        char OP = 'S';
+        int opcion = 0;
+        String cedula, nombre;
+
+        Scanner Scanner = new Scanner(System.in);
+        pasajeroDao pasajeroDao = new pasajeroDao();
+
+        while (OP == 'S') {
+
+            System.out.println("""
+                    REGISTRO PASAJEROS
+                    
+                    1. Adulto mayor
+                    2. Estudiante
+                    3. Regular
+                    
+                    0. Salir
+                    """);
+
+            System.out.print("Selecciona una opcion: ");
+
+            try {
+                opcion = Scanner.nextInt();
+
+                switch (opcion) {
+                    case 0:
+                        OP = 'N';
+                        System.out.println("Hemos terminado...");
+                        break;
+
+                    case 1:
+                        do {
+                            System.out.println("******* REGISTRO DE ADULTO MAYOR *******");
+                            Scanner.nextLine();
+
+                            System.out.print("Ingrese la cedula: ");
+                            cedula = Scanner.nextLine();
+
+                            System.out.print("Ingrese el nombre: ");
+                            nombre = Scanner.nextLine();
+
+                            pasajeroAdultoMayor pasajeroAdultoMayor = new pasajeroAdultoMayor(cedula, nombre);
+                            pasajeroDao.guardar(pasajeroAdultoMayor);
+                            System.out.println("Pasajero registrado exitosamente.");
+
+                            System.out.print("¿Ingresar otro? S/N: ");
+                            OP = Scanner.next().toUpperCase().charAt(0);
+                        } while (OP == 'S');
+                        break;
+
+                    case 2:
+                        do {
+                            System.out.println("******* REGISTRO DE ESTUDIANTE *******");
+                            Scanner.nextLine();
+
+                            System.out.print("Ingrese la cedula: ");
+                            cedula = Scanner.nextLine();
+
+                            System.out.print("Ingrese el nombre: ");
+                            nombre = Scanner.nextLine();
+
+                            pasajeroEstudiante pasajeroEstudiante = new pasajeroEstudiante(cedula, nombre);
+                            pasajeroDao.guardar(pasajeroEstudiante);
+                            System.out.println("Pasajero registrado exitosamente.");
+
+                            System.out.print("¿Ingresar otro? S/N: ");
+                            OP = Scanner.next().toUpperCase().charAt(0);
+                        } while (OP == 'S');
+                        break;
+
+                    case 3:
+                        do {
+                            System.out.println("******* REGISTRO DE REGULAR *******");
+                            Scanner.nextLine();
+
+                            System.out.print("Ingrese la cedula: ");
+                            cedula = Scanner.nextLine();
+
+                            System.out.print("Ingrese el nombre: ");
+                            nombre = Scanner.nextLine();
+
+                            pasajeroRegular pasajeroRegular = new pasajeroRegular(cedula, nombre);
+                            pasajeroDao.guardar(pasajeroRegular);
+                            System.out.println("Pasajero registrado exitosamente.");
+
+                            System.out.print("¿Ingresar otro? S/N: ");
+                            OP = Scanner.next().toUpperCase().charAt(0);
+                        } while (OP == 'S');
+                        break;
+
+                    default:
+                        System.err.println("Opcion invalida");
+                        Thread.sleep(2000);
+                        System.out.println("Regresando al menu...");
+                }
+
+            } catch (InputMismatchException e) {
+                System.err.println("Debe ingresar numeros, no letras");
+                Scanner.nextLine();
+                Thread.sleep(2000);
+                System.out.println("Regresando al menu...");
+            }
+        }
     }
+}
+
+
+
 
 
