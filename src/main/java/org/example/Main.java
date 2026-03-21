@@ -3,6 +3,8 @@ import model.Bus;
 import dao.VehiculoDao;
 import model.Buseta;
 import model.MicroBus;
+import model.conductor;
+import dao.conductorDao;
 
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
@@ -52,6 +54,9 @@ public class Main {
                         break;
                     case 1:
                         menuVehiculos();
+                        break;
+                    case 2:
+                        menuConductor();
                     default:
                         System.err.println("Opcion invalida");
                         Thread.sleep(2000);
@@ -187,11 +192,48 @@ public class Main {
         }
     }
 
+    public void menuConductor() throws InterruptedException{
+
+        char OP = 'S';
+        int opcion = 0;
+        String cedula, nombre, numeroLicencia, categoriaLicencia;
+
+        Scanner Scanner = new Scanner(System.in);
+        conductorDao conductorDao = new conductorDao();
+
+        while (OP == 'S') {
+
+            try {
+
+                System.out.println("******* REGISTRO DE CONDUCTOR *******");
+                Scanner.nextLine();
+
+                System.out.print("Ingrese la cedula: ");
+                cedula = Scanner.nextLine();
+
+                System.out.print("Ingrese el nombre: ");
+                nombre = Scanner.nextLine();
+
+                System.out.print("Ingrese el numero de licencia: ");
+                numeroLicencia = Scanner.nextLine();
+
+                System.out.print("Ingrese la categoria de licencia: ");
+                categoriaLicencia = Scanner.nextLine();
+
+                conductor conductor = new conductor(numeroLicencia, categoriaLicencia, cedula, nombre);
+                conductorDao.guardar(conductor);
+
+            } catch (InputMismatchException e) {
+                System.err.println("Debe ingresar letras no numeros");
+                Scanner.nextLine();
+                Thread.sleep(2000);
+                System.out.println("Regresando al menu...");
+            }
+
+        }
+    }
 
 
+    }
 
-
-
-
-}
 
