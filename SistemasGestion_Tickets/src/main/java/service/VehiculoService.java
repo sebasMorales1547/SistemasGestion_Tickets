@@ -43,7 +43,7 @@ public class VehiculoService {
         // 3. Asignación automática al objeto vehículo
         nuevo.setRuta(rutaValida);
 
-        vehiculos.add(nuevo);
+        vehiculos.add(nuevo);// nuevo guardar vehiculo
         vDao.guardarVehiculo(nuevo);
         return "Vehículo registrado exitosamente en la ruta: " + rutaValida.getOrigen() + " - " + rutaValida.getDestino();
     }
