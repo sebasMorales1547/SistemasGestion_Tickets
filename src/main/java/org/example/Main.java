@@ -7,6 +7,7 @@ import service.*;
 import java.time.LocalDate;
 import java.sql.SQLOutput;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -38,6 +39,7 @@ public class Main {
                     4. Vender tickets
                     5. Ver tickets
                     6. Estadisticas
+                    7. Ver reportes
                     
                     0. Salir
                     """);
@@ -69,7 +71,9 @@ public class Main {
                     case 6:
                         menuEstadisticas();
                         break;
-
+                    case 7:
+                        menuReportes();
+                        break;
                     default:
                         System.err.println("Opcion invalida");
                         Thread.sleep(2000);
@@ -349,6 +353,114 @@ public class Main {
 
         System.out.println("--- Vehiculo con mas tickets ---");
         System.out.println(ticketService.vehiculoConMasTickets());
+    }
+
+    public void menuReportes() throws InterruptedException{
+        personaService personaService = new personaService();
+        ticketService ticketService = new ticketService(personaService.getPasajeros());
+
+        char OP = 'S';
+        int opcion = 0;
+        Scanner Scanner = new Scanner(System.in);
+
+        while (OP == 'S') {
+
+            System.out.println("""
+                ******* REPORTES *******
+                
+                1. Tickets por fecha
+                2. Tickets por tipo de vehiculo
+                3. Tickets por tipo de pasajero
+                4. Resumen del dia
+                
+                0. Salir
+                """);
+
+            System.out.print("Selecciona una opcion: ");
+
+            try {
+                opcion = Scanner.nextInt();
+
+                switch (opcion) {
+                    case 0:
+                        OP = 'N';
+                        System.out.println("Hemos terminado...");
+                        break;
+
+                    case 1:
+                        System.out.print("Ingrese la fecha (YYYY-MM-DD): ");
+                        String fecha = Scanner.next();
+                        List<ticket> porFecha = ticketService.buscarPorFecha(LocalDate.parse(fecha));
+                        if (porFecha.isEmpty()) {
+                            System.out.println("No hay tickets para esa fecha.");
+                        } else {
+                            porFecha.forEach(t -> t.imprimirDetalle());
+                        }
+                        break;
+
+                    case 2:
+                        System.out.println("""
+                            Tipo de vehiculo:
+                            1. Bus
+                            2. Buseta
+                            3. Microbus
+                            """);
+                        System.out.print("Selecciona: ");
+                        int tipoV = Scanner.nextInt();
+                        String tipoVehiculo = switch (tipoV) {
+                            case 1 -> "Bus";
+                            case 2 -> "Buseta";
+                            case 3 -> "MicroBus";
+                            default -> "";
+                        };
+                        List<ticket> porVehiculo = ticketService.buscarPorTipoVehiculo(tipoVehiculo);
+                        if (porVehiculo.isEmpty()) {
+                            System.out.println("No hay tickets para ese tipo de vehiculo.");
+                        } else {
+                            porVehiculo.forEach(t -> t.imprimirDetalle());
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("""
+                            Tipo de pasajero:
+                            1. Adulto mayor
+                            2. Estudiante
+                            3. Regular
+                            """);
+                        System.out.print("Selecciona: ");
+                        int tipoP = Scanner.nextInt();
+                        String tipoPasajero = switch (tipoP) {
+                            case 1 -> "Adulto Mayor";
+                            case 2 -> "Estudiante";
+                            case 3 -> "Regular";
+                            default -> "";
+                        };
+                        List<ticket> porPasajero = ticketService.buscarPorTipoPasajero(tipoPasajero);
+                        if (porPasajero.isEmpty()) {
+                            System.out.println("No hay tickets para ese tipo de pasajero.");
+                        } else {
+                            porPasajero.forEach(t -> t.imprimirDetalle());
+                        }
+                        break;
+
+                    case 4:
+                        ticketService.resumenDia();
+                        break;
+
+                    default:
+                        System.err.println("Opcion invalida");
+                        Thread.sleep(2000);
+                        System.out.println("Regresando al menu...");
+                }
+
+            } catch (InputMismatchException e) {
+                System.err.println("Debe ingresar numeros, no letras");
+                Scanner.nextLine();
+                Thread.sleep(2000);
+                System.out.println("Regresando al menu...");
+            }
+        }
     }
 
 }
