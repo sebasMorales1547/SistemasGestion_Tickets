@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package service;
 
 import dao.VehiculoDao;
-import dao.VehiculoDao;
 import model.Vehiculo;
+import model.Buseta;
+import model.MicroBus;
+import model.Bus;
 import java.util.List;
 
 public class VehiculoService {
@@ -15,18 +13,17 @@ public class VehiculoService {
 
     public VehiculoService() {
         this.vDao = new VehiculoDao();
-        this.vehiculos = vDao.cargarVehiculos(); // Carga automática al iniciar 
+        this.vehiculos = vDao.cargarVehiculos();
     }
 
     public String registrarVehiculo(Vehiculo nuevo) {
-        // Validación: No registrar dos vehículos con la misma placa
         for (Vehiculo v : vehiculos) {
             if (v.getPlaca().equalsIgnoreCase(nuevo.getPlaca())) {
                 return "Error: Ya existe un vehículo con esa placa.";
             }
         }
         vehiculos.add(nuevo);
-        vDao.guardarVehiculo(nuevo); // Guardar inmediatamente 
+        vDao.guardarVehiculo(nuevo);
         return "Vehículo registrado con éxito.";
     }
 
@@ -35,5 +32,20 @@ public class VehiculoService {
                 .filter(v -> v.getPlaca().equalsIgnoreCase(placa))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<Vehiculo> buscarPorTipo(String tipo) {
+        return vehiculos.stream()
+                .filter(v -> switch (tipo.toLowerCase()) {
+                    case "buseta"   -> v instanceof Buseta;
+                    case "microbus" -> v instanceof MicroBus;
+                    case "bus"      -> v instanceof Bus;
+                    default         -> false;
+                })
+                .toList();
+    }
+
+    public List<Vehiculo> obtenerTodos() {
+        return vehiculos;
     }
 }
