@@ -529,10 +529,14 @@ public class Main {
                         }
 
                         System.out.print("Ingrese la fecha de viaje (YYYY-MM-DD): ");
-                        LocalDate fechaViaje = LocalDate.parse(Scanner.nextLine());
-
-                        String resultadoCrear = reservaService.crearReserva(pasajero, vehiculo, fechaViaje, ticketService.gettickets());
-                        System.out.println(resultadoCrear);
+                        try {
+                            LocalDate fechaViaje = LocalDate.parse(Scanner.nextLine());
+                            String resultadoCrear = reservaService.crearReserva(pasajero, vehiculo, fechaViaje, ticketService.gettickets());
+                            System.out.println(resultadoCrear);
+                        } catch (Exception e) {
+                            System.err.println("Fecha invalida. Use el formato YYYY-MM-DD. Ejemplo: 2026-03-21");
+                            Thread.sleep(2000);
+                        }
                         break;
 
                     case 2:
