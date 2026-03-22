@@ -1,4 +1,4 @@
-package org.example;
+package view;
 import model.*;
 import dao.*;
 import service.personaService;
