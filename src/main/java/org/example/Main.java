@@ -150,7 +150,6 @@ public class Main {
 
                     case 2:
 
-
                         do {
 
                             String placa, ruta;
@@ -176,7 +175,8 @@ public class Main {
                         do {
 
                             String placa, ruta;
-                            System.out.println("*******REGISTRO DE BUSETA*******");
+                            System.out.println("*******REGISTRO DE MICROBUSETA*******");
+                            Scanner.nextLine();
 
                             System.out.print("Ingrese la placa del vehiculo: ");
                             placa = Scanner.nextLine();
