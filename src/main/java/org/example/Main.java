@@ -177,7 +177,6 @@ public class Main {
 
                             String placa, ruta;
                             System.out.println("*******REGISTRO DE BUSETA*******");
-                            Scanner.nextLine();
 
                             System.out.print("Ingrese la placa del vehiculo: ");
                             placa = Scanner.nextLine();
@@ -393,11 +392,16 @@ public class Main {
                     case 1:
                         System.out.print("Ingrese la fecha (YYYY-MM-DD): ");
                         String fecha = Scanner.next();
-                        List<ticket> porFecha = ticketService.buscarPorFecha(LocalDate.parse(fecha));
-                        if (porFecha.isEmpty()) {
-                            System.out.println("No hay tickets para esa fecha.");
-                        } else {
-                            porFecha.forEach(t -> t.imprimirDetalle());
+                        try {
+                            List<ticket> porFecha = ticketService.buscarPorFecha(LocalDate.parse(fecha));
+                            if (porFecha.isEmpty()) {
+                                System.out.println("No hay tickets para esa fecha.");
+                            } else {
+                                porFecha.forEach(t -> t.imprimirDetalle());
+                            }
+                        } catch (Exception e) {
+                            System.err.println("Fecha invalida. Use el formato YYYY-MM-DD. Ejemplo: 2026-03-21");
+                            Thread.sleep(2000);
                         }
                         break;
 
