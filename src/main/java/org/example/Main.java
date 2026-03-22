@@ -188,7 +188,7 @@ public class Main {
                             VehiculoDao.guardarVehiculo(MicroBus);
 
                             System.out.println("¿Ingresar otro bus? S/N");
-                            continuar = Scanner.next().charAt(0);
+                            continuar = Scanner.next().toUpperCase().charAt(0);
                         } while (continuar == 'S');
                         break;
 
@@ -223,7 +223,6 @@ public class Main {
             try {
 
                 System.out.println("******* REGISTRO DE CONDUCTOR *******");
-                Scanner.nextLine();
 
                 System.out.print("Ingrese la cedula: ");
                 cedula = Scanner.nextLine();
@@ -239,6 +238,9 @@ public class Main {
 
                 conductor conductor = new conductor(numeroLicencia, categoriaLicencia, cedula, nombre);
                 conductorDao.guardar(conductor);
+
+                System.out.println("Desea continuar? S/N");
+                OP = Scanner.next().toUpperCase().charAt(0);
 
             } catch (InputMismatchException e) {
                 System.err.println("Debe ingresar letras no numeros");
