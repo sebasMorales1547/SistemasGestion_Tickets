@@ -111,10 +111,15 @@ public class ticketService {
     }
 
     public List<ticket> buscarPorTipoVehiculo(String tipo) {
-        return tickets.stream()
-                .filter(t -> t.getPlacaVehiculo().startsWith(tipo))
-                .collect(Collectors.toList());
-    }
+    VehiculoService vehiculoService = new VehiculoService();
+    List<String> placas = vehiculoService.buscarPorTipo(tipo).stream()
+            .map(Vehiculo::getPlaca)
+            .collect(Collectors.toList());
+
+    return tickets.stream()
+            .filter(t -> placas.contains(t.getPlacaVehiculo()))
+            .collect(Collectors.toList());
+}
 
     public List<ticket> buscarPorTipoPasajero(String tipo) {
         return tickets.stream()
