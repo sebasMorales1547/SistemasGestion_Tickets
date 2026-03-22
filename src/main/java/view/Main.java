@@ -263,7 +263,6 @@ public class Main {
         do {
             try {
                 System.out.println("******* REGISTRO DE PASAJERO *******");
-                Scanner.nextLine();
 
                 System.out.print("Ingrese la cedula: ");
                 cedula = Scanner.nextLine();
