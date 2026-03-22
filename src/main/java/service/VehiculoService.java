@@ -44,7 +44,7 @@ public class VehiculoService {
                 })
                 .toList();
     }
-
+ //Obtener todooo
     public List<Vehiculo> obtenerTodos() {
         return vehiculos;
     }
